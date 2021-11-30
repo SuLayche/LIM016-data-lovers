@@ -13,6 +13,7 @@ entrenadores de Pokémon" y pueden:
 - **Competir** en épicos combates contra otros entrenadores.
 - **Hacer equipo** con otros entrenadores para atrapar poderosos Pokémon
   durante las incursiones.
+![paleta](/ImagenesReadme/paleta.png)
 
 ## Hallazgos
 
