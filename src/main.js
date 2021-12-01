@@ -1,12 +1,13 @@
 // IMPORTAR DATA DE POKEMON.JS
 import data from './data/pokemon/pokemon.js';
-import { buscarPokemon, filterRegion, filterType, ordenarPokemons, obtenerPokemon} from './data.js';
+import { buscarPokemon, filtrarRegion, filtrarTipo, ordenarPokemons, obtenerPokemon} from './data.js';
 
 //VARIABLES GLOBALES
 let filterByRegion = false;
 let filterByType = false;
 let filterBySearch = false;
 let orderBy = false;
+
 
 // CUANDO CARGA LA PAGINA
 window.onload = () => {
@@ -47,10 +48,10 @@ inputBuscador.addEventListener("keyup",(e)=>{
     let dataPokemons = data.pokemon;
     //OPCIONES DE FILTROS
     if (filterByRegion) {
-        dataPokemons = buscarPokemon(dataPokemons, filterByRegion);
+        dataPokemons = filtrarRegion(dataPokemons, filterByRegion);
     }
     if (filterByType) {
-        dataPokemons = buscarPokemon(dataPokemons, filterBySearch);
+        dataPokemons = filtrarTipo(dataPokemons, filterBySearch);
     }
     //OPCION DE ORDENAR
     if (orderBy) {
@@ -63,7 +64,7 @@ inputBuscador.addEventListener("keyup",(e)=>{
 // EVENTO AL REALIZAR CLICK EN EL MENU HAMBURGUESA
 const iconoHamburguesa = document.querySelector(".menuHamburguesa");
 const menu = document.querySelector(".cont-menu");
-iconoHamburguesa.addEventListener("click", (e)=>{
+iconoHamburguesa.addEventListener("click", ()=>{
     if (menu.style.display == 'block') {
         menu.style.display = 'none';
     } 
@@ -104,7 +105,7 @@ region.forEach(e => {
             dataPokemons = buscarPokemon(dataPokemons, filterBySearch);
         }
         if (filterByType) {
-            dataPokemons = filtrarElemento(dataPokemons, filterByType);
+            dataPokemons = filtrarTipo(dataPokemons, filterByType);
         }
         //OPCION DE ORDENAR
         if (orderBy) {
@@ -135,7 +136,7 @@ tipo.forEach(e=>{
         if (orderBy) {
             dataPokemons = ordenarPokemons(dataPokemons, orderBy);
         }
-        dataPokemons = filtrarElemento(dataPokemons, filterByType);
+        dataPokemons = filtrarTipo(dataPokemons, filterByType);
         llenarCards(dataPokemons);
     });
 });
@@ -158,7 +159,7 @@ ordenar.forEach( e => {
             dataPokemons = filtrarRegion(dataPokemons, filterByRegion);
         }
         if (filterByType) {
-            dataPokemons = filtrarElemento(dataPokemons, filterByType);
+            dataPokemons = filtrarTipo(dataPokemons, filterByType);
         }
         dataPokemons = ordenarPokemons(dataPokemons, orderBy);
         llenarCards(dataPokemons);
@@ -276,7 +277,6 @@ containerPokemons.addEventListener("click", e =>{
     if(e.target.classList.contains("imgPokemon")){
         limpiarModal();
         llenarModal(data.pokemon,obtenerPokemon(data.pokemon, e.target.id));
-        //masInfoPokemon(data.pokemon, e.target.id, containerModal);
         containerModal.classList.add("show");
     }
 });
@@ -307,7 +307,7 @@ const filterJohto=data.pokemon.filter(function(element){
 let cantidadJohto=filterJohto.length;
 
 // GRAFICO DE PIE DE CANTIDAD DE POKEMONES POR REGION
-let chartRegion= new Chart(ctxRegion,{
+new Chart(ctxRegion,{
     type:'pie',
     data: {
         labels:['Kanto', 'Johto'],
@@ -425,7 +425,7 @@ const filterVolador=data.pokemon.filter(function(element){
 let cantidadVolador=filterVolador.length;
 
 // GRAFICO DE BARRAS DE CANTIDAD DE POKEMONES POR TIPO
-let chartElemento= new Chart(ctxElemento,{
+new Chart(ctxElemento,{
     type:'bar',
     data: {
         labels:[ 'Agua', 'Fuego', 'Hierba', 'Tierra', 'Roca', 'Hielo', 'Electrico', 'Dragon', 'Fantasma', 'Psiquico', 'Normal', 'Lucha', 'Veneno', 'Bicho', 'Volador'],
@@ -459,7 +459,7 @@ const filter10Km=data.pokemon.filter(function(element){
 let cantidad10Km=filter10Km.length;
 
 // GRAFICO DE PIE DE CANTIDAD DE POKEMONES QUE ECLOSIONAN POR CADA KM DE HUEVO
-let chartHuevos= new Chart(ctxHuevos,{
+new Chart(ctxHuevos,{
     type:'doughnut',
     data: {
         labels:['Huevos de 2Km', 'Huevos de 5Km', 'Huevos de 10Km'],
@@ -500,7 +500,7 @@ const filterRecorrido20Km=data.pokemon.filter(function(element){
 let cantidadRecorrido20Km=filterRecorrido20Km.length;
  
 // GRAFICO DE PIE DE CANTIDAD DE POKEMONES POR RECORRIDO
-let chartRecorrido= new Chart(ctxRecorrido,{
+new Chart(ctxRecorrido,{
     type:'polarArea',
     data: {
         labels:['Recorrido de 1Km', 'Recorrido de 3Km', 'Recorrido de 5Km', 'Recorrido de 20Km'],
