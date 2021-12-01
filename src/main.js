@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // IMPORTAR DATA DE POKEMON.JS
 import data from './data/pokemon/pokemon.js';
 import { buscarPokemon, filtrarRegion, filtrarTipo, ordenarPokemons, obtenerPokemon} from './data.js';

@@ -811,7 +811,7 @@ HTC One: 360 x 640 */
 
 }
 @media  (max-height: 360px) and (orientation: landscape) {
-   
+    
     .home {
         min-height: 25vh;
     }
